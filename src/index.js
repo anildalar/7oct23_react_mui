@@ -1,17 +1,39 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+//1. Import Area
 import './index.css';
+import React, { createContext } from 'react';
+import ReactDOM from 'react-dom/client';
+import { ThemeProvider, createTheme } from '@mui/material'
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 
+function anil(){
+  return 'orange';
+}
+
+let clr = anil();
+export const ThemeProvider2 = createContext();
+const customTheme = createTheme({
+  palette: {
+    primary: {
+      main: '#FF0000', // Replace this with your desired primary color
+    },
+    // You can also customize secondary and other palette colors here
+  },
+})
+
+let clr3 = '#0000FF';
+
+
+//2. Define Area
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+
+    <ThemeProvider  theme={customTheme}>
+      <ThemeProvider2.Provider value={clr3}>
+        <App mycolor={clr} />
+      </ThemeProvider2.Provider>
+    </ThemeProvider>
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+//3. Export Area
